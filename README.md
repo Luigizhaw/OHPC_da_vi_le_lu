@@ -1,1 +1,2 @@
-# OHPC_da_vi_le_lu
+# OHPC_vi_le_lu
+Authors: Victoria Hummel, Leonard Kieffer, Luigi Palese
