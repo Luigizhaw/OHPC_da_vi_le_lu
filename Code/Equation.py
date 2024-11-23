@@ -1,37 +1,38 @@
-# Description: This script contains the model function for a single cycle x_k(t), the combined model for all 10 cycles, and the MSE loss function.
-# Import script -> from Equation import combined_model, mse_loss, solar_cycle_model
-##############################################################################
-
-import numpy as np
-
-
-# Define the model function based on the provided solar cycle formula
-def solar_cycle_model(t, params):
+def solar_cycle_model(params, time_points, num_cycles=10):
     """
-    Compute the solar cycle model value.
-    :param t: Time (array-like).
-    :param params: Model parameters [T01, Ts1, Td1, ..., T010, Ts10, Td10].
-    :return: Model prediction at times t.
+    Solar Cycle Model: Computes x(t) based on the provided parameters and time points.
+
+    Args:
+        params (np.ndarray): Model parameters (30 in total: T0k, Tsk, Tdk for k=1 to 10).
+        time_points (np.ndarray): Array of time points to evaluate the model.
+        num_cycles (int): Number of solar cycles (default=10).
+
+    Returns:
+        np.ndarray: Model prediction x(t) for the given time points.
     """
-    cycles = 10  # 10 cycles in the dataset
-    n_params_per_cycle = 3
-    model = np.zeros_like(t)
+    x_t = np.zeros_like(time_points)  # Initialize the model output
+    for k in range(num_cycles):
+        # Extract parameters for cycle k
+        T0k, Tsk, Tdk = params[3 * k : 3 * (k + 1)]
+        # Compute x_k(t) for all time points
+        x_k = ((time_points - T0k) / Tsk) ** 2 * np.exp(-((time_points - T0k) / Tdk) ** 2)
+        x_t += x_k  # Accumulate contributions from each cycle
+    return x_t
 
-    for k in range(cycles):
-        T0k, Tsk, Tdk = params[k * n_params_per_cycle:(k + 1) * n_params_per_cycle]
-        model += ((t - T0k) / Tsk) ** 2 * np.exp(-((t - T0k) / Tdk) ** 2)
 
-    return model
-
-
-# Define the loss function (MSE) for optimization
-def mse_loss(params, t, y):
+def objective_function(params, dataset):
     """
-    Compute the Mean Squared Error (MSE) between the model and the data.
-    :param params: Model parameters [T01, Ts1, Td1, ..., T010, Ts10, Td10].
-    :param t: Time values.
-    :param y: Observed sunspot numbers.
-    :return: Mean Squared Error.
+    Objective Function: Computes the MSE between the model and observed data.
+
+    Args:
+        params (np.ndarray): Model parameters (30 in total: T0k, Tsk, Tdk for k=1 to 10).
+        dataset (pd.DataFrame): Dataset containing 'Time' and 'SN' columns.
+
+    Returns:
+        float: Mean Squared Error (MSE) between the model and observed data.
     """
-    y_pred = solar_cycle_model(t, params)
-    return np.mean((y - y_pred) ** 2)
+    # Predictions from the model
+    predictions = solar_cycle_model(params, dataset['Time'].values)
+    # Compute MSE
+    mse = np.mean((dataset['SN'].values - predictions) ** 2)
+    return mse
