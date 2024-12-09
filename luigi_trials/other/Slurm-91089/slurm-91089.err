@@ -1,0 +1,12 @@
+/cm/local/apps/slurm/var/spool/job91089/slurm_script: line 16: moduel: command not found
+
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.12.0
+  latest version: 24.11.0
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+

@@ -1,0 +1,9 @@
+---
+name: OHPC
+channels:
+  - conda-forge
+dependencies:
+  - python>=3
+  - matplotlib
+  - numpy
+  - pandas
