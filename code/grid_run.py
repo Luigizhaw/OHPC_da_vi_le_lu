@@ -6,22 +6,23 @@ from itertools import product
 simulate_script = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py"
 conda_activate = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/ohpc/bin/activate"
 data_file = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/Datasets/data_Minimizers.csv"
-output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1"
+output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run2"
 
 def create_grid():
-    """Generate a grid of parameters."""
-    T0_range = np.linspace(1855, 1955, 5)  # Start times
-    Ts_range = np.linspace(1, 10, 5)       # Amplitude scaling
-    Td_range = np.linspace(5, 20, 5)       # Decay scaling
-    sigma_range = [0.01, 0.1, 1.0]         # Sigma values
+    """Generate an expanded grid of parameters."""
+    T0_range = np.linspace(1855, 1955, 20)  # Start times (keep a smaller range for years)
+    Ts_range = np.linspace(1, 50, 20)       # Amplitude scaling (expanded upper range)
+    Td_range = np.linspace(1, 50, 20)       # Decay scaling (expanded upper range)
+    sigma_range = np.linspace(0.001, 10.0, 20)  # Sigma values (expanded range)
     return list(product(T0_range, Ts_range, Td_range, sigma_range))
+
 
 def chunk_grid(grid, chunk_size):
     """Split the grid into smaller chunks."""
     for i in range(0, len(grid), chunk_size):
         yield grid[i:i + chunk_size]
 
-def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, normalize=False, chunk_size=100):
+def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, normalize=False, chunk_size=0):
     """Write SLURM job scripts for parameter chunks."""
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -60,7 +61,7 @@ python {simulate_script} --params "{T0},{Ts},{Td}" --sigma {sigma} --data {data_
 
 if __name__ == "__main__":
     grid = create_grid()  # Generate the full grid
-    write_jobs(grid, output_dir, partition="earth-3", chunk_size=100)  # Write jobs for parameter chunks
+    write_jobs(grid, output_dir, partition="earth-3", chunk_size=20000)  # Write jobs for parameter chunks
 
 
 
@@ -69,7 +70,7 @@ command to run in the terminal
 important change your outputfolder 
 to the outputfolder should be in the code directory:
 
-cd run1
+cd run2
 for job in job_*.sh; do
     sbatch $job
 done

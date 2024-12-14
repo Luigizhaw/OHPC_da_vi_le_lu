@@ -1,0 +1,13 @@
+Top 10 Lowest Losses:
+=====================
+1. Loss: 8142.15 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+2. Loss: 8142.15 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+3. Loss: 8142.15 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+4. Loss: 8886.35 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+5. Loss: 8886.35 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+6. Loss: 8886.35 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97646/slurm-97646.out
+7. Loss: 9693.60 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97644/slurm-97644.out
+8. Loss: 9693.60 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97644/slurm-97644.out
+9. Loss: 9693.60 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97644/slurm-97644.out
+10. Loss: 9844.57 | File: /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1/Slurm-97644/slurm-97644.out
+
