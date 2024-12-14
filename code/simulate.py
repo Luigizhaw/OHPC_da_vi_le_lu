@@ -24,5 +24,7 @@ def main():
     # Plot results
     plot_solar_model(t_obs, y_obs, optimized_params[-1])
 
+    
+
 if __name__ == "__main__":
     main()

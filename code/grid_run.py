@@ -6,15 +6,41 @@ from itertools import product
 simulate_script = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py"
 conda_activate = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/ohpc/bin/activate"
 data_file = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/Datasets/data_Minimizers.csv"
-output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run2"
-
+#################################################################################################
+output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run3" # change the folder for each run!
+######################################################################################################
 def create_grid():
-    """Generate an expanded grid of parameters."""
-    T0_range = np.linspace(1855, 1955, 20)  # Start times (keep a smaller range for years)
-    Ts_range = np.linspace(1, 50, 20)       # Amplitude scaling (expanded upper range)
-    Td_range = np.linspace(1, 50, 20)       # Decay scaling (expanded upper range)
-    sigma_range = np.linspace(0.001, 10.0, 20)  # Sigma values (expanded range)
-    return list(product(T0_range, Ts_range, Td_range, sigma_range))
+    """
+    Generate a grid of parameters for solar cycles 10 to 19.
+
+    The starting times (T0) are taken from Hathaway (2015).
+    Ts and Td are initialized with broader ranges for exploration.
+    """
+    # Starting times (T0) for cycles 10 to 19 (from Hathaway 2015)
+    T0_values = [
+        1855.9,  # Cycle 10
+        1867.2,  # Cycle 11
+        1878.9,  # Cycle 12
+        1890.1,  # Cycle 13
+        1901.7,  # Cycle 14
+        1913.6,  # Cycle 15
+        1923.6,  # Cycle 16
+        1933.8,  # Cycle 17
+        1944.2,  # Cycle 18
+        1954.3   # Cycle 19
+    ]
+    
+    # Ranges for Ts (rising time constant) and Td (decay time constant)
+    Ts_range = np.linspace(0.05, 2.0, 30)  # Broader range for rising time
+    Td_range = np.linspace(0.05, 20.0, 30)  # Broader range for decay time
+
+    # Variance for jump proposals in simulated annealing
+    sigma_range = np.linspace(0.001, 1.0, 30)  # Reasonable range for sigma
+
+    # Generate the grid using itertools.product
+    grid = list(product(T0_values, Ts_range, Td_range, sigma_range))
+    
+    return grid
 
 
 def chunk_grid(grid, chunk_size):
@@ -38,7 +64,7 @@ def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, norma
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4GB
-#SBATCH --time=12:00:00
+#SBATCH --time=20:00:00
 #SBATCH --partition={partition}
 
 # Load Python environment
@@ -61,16 +87,16 @@ python {simulate_script} --params "{T0},{Ts},{Td}" --sigma {sigma} --data {data_
 
 if __name__ == "__main__":
     grid = create_grid()  # Generate the full grid
-    write_jobs(grid, output_dir, partition="earth-3", chunk_size=20000)  # Write jobs for parameter chunks
+    write_jobs(grid, output_dir, partition="earth-3", chunk_size=10000)  # Write jobs for parameter chunks
 
 
-
+################################END OF SCRIPT###########################################################################
 """
 command to run in the terminal 
 important change your outputfolder 
 to the outputfolder should be in the code directory:
 
-cd run2
+cd run3
 for job in job_*.sh; do
     sbatch $job
 done

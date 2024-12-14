@@ -124,19 +124,18 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1):
     x = x0.copy()  # Initialize parameters
     T = T0  # Initialize temperature
     n_params = x0.shape[0]  # Number of parameters
-
-    # Means and covariance matrix for parameter jumps
     means = np.zeros(n_params)
     cov_matrix = np.diag(np.full(n_params, sigma))
 
-    # Output size after thinning
     size_out = int((n_iter + thinning - 1) // thinning)
     v = np.zeros((size_out, n_params))
     v[0, :] = x  # Store initial parameters
 
     iter_counter = 0
     iter_counter_thin = 0
-    print("Initial loss:", f(x))
+    best_loss = f(x)
+    best_params = x.copy()
+    print(f"Initial loss: {best_loss}")
 
     while iter_counter < n_iter:
         iter_counter += 1
@@ -147,8 +146,10 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1):
         # Metropolis accept/reject step
         if np.exp(-np.clip(DeltaE / T, -100, 100)) >= np.random.rand():
             x = x_proposal
-        else:
-            x = x_old
+            current_loss = f(x)
+            if current_loss < best_loss:
+                best_loss = current_loss
+                best_params = x.copy()
 
         # Update temperature
         T = T0 * (1 - iter_counter / n_iter)
@@ -158,5 +159,11 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1):
             v[iter_counter_thin, :] = x
             iter_counter_thin += 1
 
+        # Log progress every 100 iterations
+        if iter_counter % 100 == 0:
+            print(f"Iteration {iter_counter}: Loss = {best_loss}")
+
+    print(f"Best loss: {best_loss} | Parameters: {best_params}")
     return v
+
 
