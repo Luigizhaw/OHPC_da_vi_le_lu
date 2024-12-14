@@ -1,34 +1,32 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "Datasets")
-DATA_FILE = os.path.join(DATA_DIR, "test.csv")
-
-
-def load_and_preprocess_data(file_path):
+def load_and_preprocess_data(file_path, normalize=False):
     """
     Load and preprocess the solar activity data.
-    
+
     Parameters:
     - file_path: str, the path to the CSV file containing the data.
-    
+    - normalize: bool, whether to scale 'SN' values between 0 and 1.
+
     Returns:
-    - data: DataFrame, the cleaned and preprocessed data with normalized 'SN'.
+    - t_obs: numpy array, time points.
+    - y_obs: numpy array, sunspot numbers.
     """
     # Load the data
     data = pd.read_csv(file_path)
-    
+
     # Check for missing values
     if data.isnull().sum().any():
         raise ValueError("Data contains missing values. Please clean the dataset.")
-
-    # Normalize the 'SN' (sunspot number) values using MinMaxScaler
-    scaler = MinMaxScaler()
-    data['SN'] = scaler.fit_transform(data[['SN']])
     
-    # Optionally, you can drop rows with extreme outliers in 'SN' if needed
-    # For now, we keep all the values
-    
-    return data
+    # Extract time and sunspot number columns
+    t_obs = data['Time'].values
+    y_obs = data['SN'].values
 
+    # Normalize 'SN' if required
+    if normalize:
+        scaler = MinMaxScaler()
+        y_obs = scaler.fit_transform(y_obs.reshape(-1, 1)).flatten()
+
+    return t_obs, y_obs

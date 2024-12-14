@@ -1,34 +1,27 @@
 import argparse
 import numpy as np
 from solar_model import optimize_solar_model, plot_solar_model
-import os 
-
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "Datasets")
-
-# Path to dataset
-DATA_FILE = os.path.join(DATA_DIR, "data_Minimizers.csv")
-
-# Load dataset
-data = np.loadtxt(DATA_FILE, delimiter=",", skiprows=1)
-t_obs = data[:, 0]
-y_obs = data[:, 1]
+from load_clean import load_and_preprocess_data  # Assuming the function is in data_loader.py
 
 def main():
-    # Parse parameters
     parser = argparse.ArgumentParser(description="Run solar model optimization.")
-    parser.add_argument("--params", type=str, required=True, help="Parameters as a tuple (T0_k, Ts_k, Td_k, ...)")
+    parser.add_argument("--params", type=str, required=True, help="Parameters as a tuple (T0, Ts, Td).")
+    parser.add_argument("--sigma", type=float, required=True, help="Sigma value for simulated annealing.")
+    parser.add_argument("--data", type=str, required=True, help="Path to the input CSV file.")
+    parser.add_argument("--normalize", action="store_true", help="Apply scaling (normalize SN values to 0-1).")
     args = parser.parse_args()
 
-    # Convert parameters from string to array
-    params = np.array(eval(args.params))
+    # Parse parameters
+    T0, Ts, Td = map(float, args.params.split(','))
+    params = np.array([T0, Ts, Td])
 
-    # Load data (if integrated into this script)
-    #t_obs = np.load("t_obs.npy")  # Adjust based on your actual data
-    #y_obs = np.load("y_obs.npy")  # Adjust based on your actual data
+    # Load and preprocess data
+    t_obs, y_obs = load_and_preprocess_data(args.data, normalize=args.normalize)
 
-    # Optimize and visualize
-    optimized_params = optimize_solar_model(t_obs, y_obs, params, T0=1.0, sigma=0.1, n_iter=1000)
+    # Run optimization
+    optimized_params = optimize_solar_model(t_obs, y_obs, params, T0=1.0, sigma=args.sigma, n_iter=1000)
+
+    # Plot results
     plot_solar_model(t_obs, y_obs, optimized_params[-1])
 
 if __name__ == "__main__":

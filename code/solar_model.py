@@ -1,9 +1,8 @@
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATA_DIR = os.path.join(BASE_DIR, "Datasets")
-DATA_FILE = os.path.join(DATA_DIR, "test.csv")
+
 
 def solar_cycle_model(t, params):
     """
@@ -31,12 +30,15 @@ def solar_cycle_model(t, params):
     # Calculate the model values for each cycle
     for i, (a, b) in enumerate(intervals):
         mask = (a <= t) & (t < b)
-        result[mask] = ((t[mask] - T0[i]) / Ts[i]) ** 2 * np.exp(-((t[mask] - T0[i]) / Td[i]) ** 2)
+        #result[mask] = ((t[mask] - T0[i]) / Ts[i]) ** 2 * np.exp(-((t[mask] - T0[i]) / Td[i]) ** 2)
+        result[mask] = (((t[mask] - T0[i]) / Ts[i]) ** 2) * np.exp(-((t[mask] - T0[i]) / Td[i]) ** 2)
+        # This remains unchanged unless scaling mismatches occur.
+
 
     return result
 
 
-def mse_loss(params, t_obs, y_obs):
+def mse_loss(params, t_obs, y_obs, scale_y_pred=False):
     """
     Calculate the Mean Squared Error (MSE) loss for the model.
 
@@ -44,13 +46,19 @@ def mse_loss(params, t_obs, y_obs):
     - params: array-like, model parameters [T0_1, Ts_1, Td_1, ..., T0_10, Ts_10, Td_10].
     - t_obs: array-like, observed time points.
     - y_obs: array-like, observed sunspot numbers.
+    - scale_y_pred: bool, whether to scale predicted values to match y_obs scaling.
 
     Returns:
     - mse: float, the MSE loss.
     """
     y_pred = solar_cycle_model(t_obs, params)
+
+    if scale_y_pred:
+        y_pred = MinMaxScaler().fit_transform(y_pred.reshape(-1, 1)).flatten()
+
     mse = np.mean((y_obs - y_pred) ** 2)
     return mse
+
 
 
 # Example structure for simulated annealing optimization
@@ -86,7 +94,6 @@ def plot_solar_model(t_obs, y_obs, params):
     - params: array-like, optimized parameters.
     """
     y_pred = solar_cycle_model(t_obs, params)
-    import matplotlib.pyplot as plt
 
     plt.figure(figsize=(10, 6))
     plt.scatter(t_obs, y_obs, label="Observed Data", color="orange", s=10)
