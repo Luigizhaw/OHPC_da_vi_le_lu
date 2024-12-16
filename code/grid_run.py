@@ -7,40 +7,26 @@ simulate_script = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py
 conda_activate = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/ohpc/bin/activate"
 data_file = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/Datasets/data_Minimizers.csv"
 #################################################################################################
-output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run3" # change the folder for each run!
+output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run9" # change the folder for each run!
 ######################################################################################################
 def create_grid():
     """
-    Generate a grid of parameters for solar cycles 10 to 19.
-
-    The starting times (T0) are taken from Hathaway (2015).
-    Ts and Td are initialized with broader ranges for exploration.
+    Generate a refined grid of parameters for solar cycles.
     """
-    # Starting times (T0) for cycles 10 to 19 (from Hathaway 2015)
     T0_values = [
-        1855.9,  # Cycle 10
-        1867.2,  # Cycle 11
-        1878.9,  # Cycle 12
-        1890.1,  # Cycle 13
-        1901.7,  # Cycle 14
-        1913.6,  # Cycle 15
-        1923.6,  # Cycle 16
-        1933.8,  # Cycle 17
-        1944.2,  # Cycle 18
-        1954.3   # Cycle 19
+        1855.9, 1867.2, 1878.9, 1890.1, 1901.7, 
+        1913.6, 1923.6, 1933.8, 1944.2, 1954.3  # Solar cycle start times
     ]
-    
-    # Ranges for Ts (rising time constant) and Td (decay time constant)
-    Ts_range = np.linspace(0.05, 2.0, 30)  # Broader range for rising time
-    Td_range = np.linspace(0.05, 20.0, 30)  # Broader range for decay time
 
-    # Variance for jump proposals in simulated annealing
-    sigma_range = np.linspace(0.001, 1.0, 30)  # Reasonable range for sigma
+    Ts_range = np.linspace(0.05, 2.0, 20)  # Finer resolution for rising time
+    Td_range = np.linspace(0.05, 20.0, 20)  # Wider and finer resolution for decay time
+    #sigma_range = np.linspace(0.001, 2.0, 20)  # More diverse sigma values
+    sigma_range = np.logspace(-4, 0, 45)  # Includes values from 0.0001 to 1.0
 
-    # Generate the grid using itertools.product
+
     grid = list(product(T0_values, Ts_range, Td_range, sigma_range))
-    
     return grid
+
 
 
 def chunk_grid(grid, chunk_size):
@@ -48,7 +34,7 @@ def chunk_grid(grid, chunk_size):
     for i in range(0, len(grid), chunk_size):
         yield grid[i:i + chunk_size]
 
-def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, normalize=False, chunk_size=0):
+def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, normalize=True, chunk_size=10000):
     """Write SLURM job scripts for parameter chunks."""
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -97,7 +83,7 @@ command to run in the terminal
 important change your outputfolder 
 to the outputfolder should be in the code directory:
 
-cd run3
+cd run9
 for job in job_*.sh; do
     sbatch $job
 done
@@ -111,5 +97,11 @@ write_jobs(grid, "jobs", partition="earth-3", data_file="/path/to/data_Minimizer
 
 without scaling of the data:
 write_jobs(grid, "jobs", partition="earth-3", data_file="/path/to/data_Minimizers.csv", normalize=False)
+
+
+
+delete all sjobs:
+
+scancel -u $USER
 
 """""

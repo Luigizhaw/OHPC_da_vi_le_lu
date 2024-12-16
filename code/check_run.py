@@ -25,7 +25,7 @@ def extract_information(file_content):
 
     return iterations, losses, best_loss, best_params
 
-def analyze_output_files(folder_path):
+def analyze_output_files(folder_path, y_max, y_min):
     """Analyze all output files in a given folder."""
     results = []
     all_iterations = []
@@ -40,14 +40,17 @@ def analyze_output_files(folder_path):
 
             iterations, losses, best_loss, best_params = extract_information(content)
 
+            # Scale back normalized loss to original MSE
+            original_loss = best_loss * ((y_max - y_min) ** 2) if best_loss is not None else None
+
             # Store results
             all_iterations.extend(iterations)
             all_losses.extend(losses)
 
-            if best_loss is not None and best_params is not None:
-                results.append((best_loss, best_params))
+            if original_loss is not None and best_params is not None:
+                results.append((original_loss, best_params))
 
-    # Sort results by best loss
+    # Sort results by original loss
     results.sort(key=lambda x: x[0])
 
     return all_iterations, all_losses, results
@@ -63,19 +66,23 @@ def plot_mse(iterations, losses):
     plt.show()
 
 def main():
-###################################################################################################################
-    folder_path = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run3"  # Replace with your current run
-#############################################################################################################
+#######################################################################################3
+    folder_path = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run9" # Replace with the current run
+
+    # Define the original scale to undo the normalizationS
+    y_max = 375.41  # Maximum value of SN
+    y_min = 0.0     # Minimum value of SN
+
     # Analyze the output files
-    iterations, losses, results = analyze_output_files(folder_path)
+    iterations, losses, results = analyze_output_files(folder_path, y_max, y_min)
 
     # Plot the MSE
     plot_mse(iterations, losses)
 
-    # Display the top 100 best parameters
+    # Display the top 100 best parameters with original MSE
     top_100_results = results[:100]
-    df = pd.DataFrame(top_100_results, columns=['Best Loss', 'Parameters'])
-    print("Top 100 Best Parameters:")
+    df = pd.DataFrame(top_100_results, columns=['Original MSE', 'Parameters'])
+    print("Top 100 Best Parameters with Original MSE:")
     print(df)
 
 if __name__ == "__main__":

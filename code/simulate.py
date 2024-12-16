@@ -19,7 +19,7 @@ def main():
     t_obs, y_obs = load_and_preprocess_data(args.data, normalize=args.normalize)
 
     # Run optimization
-    optimized_params = optimize_solar_model(t_obs, y_obs, params, T0=1.0, sigma=args.sigma, n_iter=1000)
+    optimized_params = optimize_solar_model(t_obs, y_obs, params, T0=1.0, sigma=args.sigma, n_iter=int(1e5))
 
     # Plot results
     plot_solar_model(t_obs, y_obs, optimized_params[-1])
