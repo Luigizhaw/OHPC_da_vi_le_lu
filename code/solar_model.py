@@ -1,5 +1,4 @@
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 
 def solar_cycle_model(t, params):
@@ -8,14 +7,14 @@ def solar_cycle_model(t, params):
 
     Parameters:
     - t: array-like, time points.
-    - params: array-like, parameters [T0_1, Ts_1, Td_1, ..., T0_10, Ts_10, Td_10].
+    - params: array-like, parameters [T0_1, Ts_1, Td_1, ..., T0_n, Ts_n, Td_n].
 
     Returns:
     - model_values: array-like, calculated model values at time t.
     """
     n_cycles = len(params) // 3
     T0 = params[::3]
-    epsilon = 1e-5
+    epsilon = 1e-5  # Avoid division by zero
     Ts = np.clip(params[1::3], epsilon, None)
     Td = np.clip(params[2::3], epsilon, None)
 
@@ -48,27 +47,6 @@ def mse_loss(params, t_obs, y_obs, regularization=1e-3):
     mse = np.mean((y_obs - y_pred) ** 2)
     reg_term = regularization * np.sum(params ** 2)
     return mse + reg_term
-
-def optimize_solar_model(t_obs, y_obs, x0, T0, sigma, n_iter=1e5, early_stop_threshold=1e-6):
-    """
-    Optimize the solar cycle model parameters using simulated annealing.
-
-    Parameters:
-    - t_obs: array-like, observed time points.
-    - y_obs: array-like, observed sunspot numbers.
-    - x0: array-like, initial parameters.
-    - T0: float, initial temperature.
-    - sigma: float, standard deviation for parameter jumps.
-    - n_iter: int, number of iterations.
-    - early_stop_threshold: float, threshold for early stopping.
-
-    Returns:
-    - best_params: array-like, optimized parameters.
-    """
-    def loss_function(x):
-        return mse_loss(x, t_obs, y_obs, regularization=1e-3)
-
-    return simulated_annealing_tuning(x0, T0, sigma, loss_function, n_iter=n_iter, early_stop_threshold=early_stop_threshold)
 
 def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1, early_stop_threshold=1e-6):
     """
@@ -137,6 +115,27 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1, early_
 
     print(f"Best loss: {best_loss} | Parameters: {best_params}")
     return v
+
+def optimize_solar_model(t_obs, y_obs, x0, T0, sigma, n_iter=1e5, early_stop_threshold=1e-6):
+    """
+    Optimize the solar cycle model parameters using simulated annealing.
+
+    Parameters:
+    - t_obs: array-like, observed time points.
+    - y_obs: array-like, observed sunspot numbers.
+    - x0: array-like, initial parameters.
+    - T0: float, initial temperature.
+    - sigma: float, standard deviation for parameter jumps.
+    - n_iter: int, number of iterations.
+    - early_stop_threshold: float, threshold for early stopping.
+
+    Returns:
+    - best_params: array-like, optimized parameters.
+    """
+    def loss_function(x):
+        return mse_loss(x, t_obs, y_obs, regularization=1e-3)
+
+    return simulated_annealing_tuning(x0, T0, sigma, loss_function, n_iter=n_iter, early_stop_threshold=early_stop_threshold)
 
 def plot_solar_model(t_obs, y_obs, params):
     """

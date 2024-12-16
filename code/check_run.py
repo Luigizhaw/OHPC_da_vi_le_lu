@@ -5,7 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def extract_information(file_content):
-    """Extract loss values and parameters from a file's content."""
+    """
+    Extract loss values and parameters from a file's content.
+    """
     loss_pattern = r"Iteration (\d+): Loss = ([\d\.]+)"
     best_loss_pattern = r"Best loss: ([\d\.]+) \| Parameters: \[(.*?)\]"
 
@@ -26,7 +28,9 @@ def extract_information(file_content):
     return iterations, losses, best_loss, best_params
 
 def analyze_output_files(folder_path):
-    """Analyze all output files in a given folder."""
+    """
+    Analyze all output files in a given folder.
+    """
     results = []
     all_iterations = []
     all_losses = []
@@ -53,7 +57,9 @@ def analyze_output_files(folder_path):
     return all_iterations, all_losses, results
 
 def plot_mse(iterations, losses):
-    """Plot the MSE over iterations."""
+    """
+    Plot the MSE over iterations.
+    """
     plt.figure(figsize=(10, 6))
     plt.plot(iterations, losses, marker='o', linestyle='-', alpha=0.7)
     plt.title('Mean Squared Error (MSE) Over Iterations')
@@ -62,21 +68,32 @@ def plot_mse(iterations, losses):
     plt.grid(True)
     plt.show()
 
-def main():
-#######################################################################################3
-    folder_path = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1" # Replace with the current run
+def summarize_top_results(results, top_n=10):
+    """
+    Summarize and display the top results.
 
+    Parameters:
+    - results: List of tuples containing loss and parameters.
+    - top_n: Number of top results to display.
+    """
+    df = pd.DataFrame(results[:top_n], columns=['MSE', 'Parameters'])
+    print(f"Top {top_n} Best Parameters:")
+    print(df)
+    return df
+
+def main():
+
+######################################################################
+    folder_path = "run1"  # Replace with your output folder
+#########################################################################
     # Analyze the output files
     iterations, losses, results = analyze_output_files(folder_path)
 
     # Plot the MSE
     plot_mse(iterations, losses)
 
-    # Display the top 100 best parameters
-    top_100_results = results[:100]
-    df = pd.DataFrame(top_100_results, columns=['MSE', 'Parameters'])
-    print("Top 100 Best Parameters:")
-    print(df)
+    # Display the top 10 best parameters
+    summarize_top_results(results, top_n=10)
 
 if __name__ == "__main__":
     main()
