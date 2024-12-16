@@ -1,5 +1,0 @@
-Starting optimization...
-Initial parameters: [1.87590000e+03 4.47368421e-01 4.21052632e+00]
-Sigma: 0.0379269019073225, Iterations: 100000
-Optimization complete.
-Optimized parameters: [215.34745639  15.25341688 753.52367922]
