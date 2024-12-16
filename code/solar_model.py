@@ -16,8 +16,9 @@ def solar_cycle_model(t, params):
     """
     n_cycles = len(params) // 3  # Number of cycles
     T0 = params[::3]
-    Ts = params[1::3]
-    Td = params[2::3]
+    epsilon = 1e-5  # Small value to prevent division by zero
+    Ts = np.clip(params[1::3], epsilon, None)  # Clip rising time constant
+    Td = np.clip(params[2::3], epsilon, None)  # Clip decay time constant
 
     t = np.atleast_1d(t)  # Ensure t is an array for consistency
     result = np.zeros_like(t)
@@ -28,9 +29,12 @@ def solar_cycle_model(t, params):
     # Calculate the model values for each cycle
     for i, (a, b) in enumerate(intervals):
         mask = (a <= t) & (t < b)
-        result[mask] = (((t[mask] - T0[i]) / Ts[i]) ** 2) * np.exp(-((t[mask] - T0[i]) / Td[i]) ** 2)
+        exponent = -((t[mask] - T0[i]) / Td[i]) ** 2
+        exponent = np.clip(exponent, -100, 0)  # Avoid overflow in exponential
+        result[mask] = (((t[mask] - T0[i]) / Ts[i]) ** 2) * np.exp(exponent)
 
     return result
+
 
 
 def mse_loss(params, t_obs, y_obs, regularization=1e-3):
