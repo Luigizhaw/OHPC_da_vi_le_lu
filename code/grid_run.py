@@ -2,48 +2,59 @@ import os
 import numpy as np
 from itertools import product
 
-# Define paths
-simulate_script = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py"
-conda_activate = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/ohpc/bin/activate"
-data_file = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/Datasets/data_Minimizers.csv"
-#################################################################################################
-output_dir = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run9" # change the folder for each run!
-######################################################################################################
-def create_grid():
+def create_optimized_grid(previous_results=None, refinement_factor=0.5):
     """
-    Generate a refined grid of parameters for solar cycles.
+    Generate an optimized grid of parameters for solar cycles.
+
+    Parameters:
+    - previous_results: dict, results from a previous run with keys ['T0', 'Ts', 'Td']. Default is None.
+    - refinement_factor: float, fraction to shrink parameter ranges if previous results are available.
+
+    Returns:
+    - grid: list of parameter combinations.
     """
-    T0_values = [
-        1855.9, 1867.2, 1878.9, 1890.1, 1901.7, 
-        1913.6, 1923.6, 1933.8, 1944.2, 1954.3  # Solar cycle start times
-    ]
+    # Default ranges for parameters
+    T0_values = np.arange(1855.9, 1954.4, 10)  # Starting times of solar cycles
+    Ts_range = np.linspace(0.3, 0.7, 20)       # Initial rising times
+    Td_range = np.linspace(4.0, 8.0, 20)       # Initial decay times
+    sigma_range = np.logspace(-3, 0, 20)       # Explore sigma values logarithmically
 
-    Ts_range = np.linspace(0.05, 2.0, 20)  # Finer resolution for rising time
-    Td_range = np.linspace(0.05, 20.0, 20)  # Wider and finer resolution for decay time
-    #sigma_range = np.linspace(0.001, 2.0, 20)  # More diverse sigma values
-    sigma_range = np.logspace(-4, 0, 45)  # Includes values from 0.0001 to 1.0
+    # Adjust ranges based on previous results
+    if previous_results:
+        T0_values = np.linspace(
+            max(min(previous_results['T0']) - 10, 1855.9),
+            min(max(previous_results['T0']) + 10, 1954.4),
+            int(len(T0_values) * refinement_factor)
+        )
+        Ts_range = np.linspace(
+            max(min(previous_results['Ts']) - 0.1, 0.05),
+            min(max(previous_results['Ts']) + 0.1, 2.0),
+            int(len(Ts_range) * refinement_factor)
+        )
+        Td_range = np.linspace(
+            max(min(previous_results['Td']) - 1.0, 0.05),
+            min(max(previous_results['Td']) + 1.0, 20.0),
+            int(len(Td_range) * refinement_factor)
+        )
 
-
+    # Generate grid
     grid = list(product(T0_values, Ts_range, Td_range, sigma_range))
     return grid
 
+def write_optimized_jobs(grid, output_dir, chunk_size=5000, partition="earth-3"):
+    """
+    Write SLURM job scripts for the optimized parameter grid.
 
-
-def chunk_grid(grid, chunk_size):
-    """Split the grid into smaller chunks."""
-    for i in range(0, len(grid), chunk_size):
-        yield grid[i:i + chunk_size]
-
-def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, normalize=True, chunk_size=10000):
-    """Write SLURM job scripts for parameter chunks."""
+    Parameters:
+    - grid: list of parameter combinations.
+    - output_dir: str, directory to store job scripts.
+    - chunk_size: int, number of parameter sets per job.
+    - partition: str, SLURM partition to use.
+    """
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    
-    # Split grid into chunks
-    grid_chunks = list(chunk_grid(grid, chunk_size))
-    
-    for i, chunk in enumerate(grid_chunks):
-        normalize_flag = "--normalize" if normalize else ""
+
+    for i, chunk in enumerate(np.array_split(grid, len(grid) // chunk_size + 1)):
         job_script = f"""#!/bin/bash
 #SBATCH --job-name=solar_model_{i}
 #SBATCH --output=output_{i}.txt
@@ -53,28 +64,33 @@ def write_jobs(grid, output_dir, partition="earth-3", data_file=data_file, norma
 #SBATCH --time=20:00:00
 #SBATCH --partition={partition}
 
-# Load Python environment
-source {conda_activate}
 
-# Run the simulation for each parameter set in the chunk
+source /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/ohpc/bin/activate
+
 """
-        # Add commands to run simulations for each parameter set in the chunk
         for params in chunk:
             T0, Ts, Td, sigma = params
-            job_script += f"""
-python {simulate_script} --params "{T0},{Ts},{Td}" --sigma {sigma} --data {data_file} {normalize_flag}
-"""
+            job_script += f"python /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py --params \"{T0},{Ts},{Td}\" --sigma {sigma} --data /cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/Datasets/data_Minimizers.csv\n"
 
-        # Write the script to a file
-        script_path = os.path.join(output_dir, f"job_{i}.sh")
-        with open(script_path, "w") as file:
-            file.write(job_script)
-        print(f"Job script written to: {script_path}")
+        with open(os.path.join(output_dir, f"job_{i}.sh"), "w") as f:
+            f.write(job_script)
+            print(f"Written job script: job_{i}.sh")
 
 if __name__ == "__main__":
-    grid = create_grid()  # Generate the full grid
-    write_jobs(grid, output_dir, partition="earth-3", chunk_size=10000)  # Write jobs for parameter chunks
+    # Example usage
+    
+    previous_results = {
+        'T0': [1860, 1870, 1880],
+        'Ts': [0.4, 0.5, 0.6],
+        'Td': [5.0, 6.0, 7.0]
+    }
+    
+    previous_results = None
 
+    grid = create_optimized_grid(previous_results=previous_results)
+    ##########################################################################33
+    write_optimized_jobs(grid, output_dir="run1")
+    ###################################################################################
 
 ################################END OF SCRIPT###########################################################################
 
@@ -83,7 +99,7 @@ command to run in the terminal
 important change your outputfolder 
 to the outputfolder should be in the code directory:
 
-cd run9
+cd run1
 for job in job_*.sh; do
     sbatch $job
 done

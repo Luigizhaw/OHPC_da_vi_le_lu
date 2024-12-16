@@ -67,7 +67,7 @@ def plot_mse(iterations, losses):
 
 def main():
 #######################################################################################3
-    folder_path = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run9" # Replace with the current run
+    folder_path = "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/run1" # Replace with the current run
 
     # Define the original scale to undo the normalizationS
     y_max = 375.41  # Maximum value of SN

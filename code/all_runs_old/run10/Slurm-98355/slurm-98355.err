@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py", line 30, in <module>
+    main()
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py", line 25, in main
+    plot_solar_model(t_obs, y_obs, optimized_params[-1])
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/solar_model.py", line 131, in plot_solar_model
+    y_pred = solar_cycle_model(t_obs, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/solar_model.py", line 17, in solar_cycle_model
+    n_cycles = len(params) // 3  # Number of cycles
+               ^^^^^^^^^^^
+TypeError: object of type 'numpy.float64' has no len()
+Traceback (most recent call last):
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py", line 30, in <module>
+    main()
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/simulate.py", line 25, in main
+    plot_solar_model(t_obs, y_obs, optimized_params[-1])
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/solar_model.py", line 131, in plot_solar_model
+    y_pred = solar_cycle_model(t_obs, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/solar_model.py", line 17, in solar_cycle_model
+    n_cycles = len(params) // 3  # Number of cycles
+               ^^^^^^^^^^^
+TypeError: object of type 'numpy.float64' has no len()
+slurmstepd: error: *** JOB 98355 ON node009 CANCELLED AT 2024-12-16T08:08:03 ***

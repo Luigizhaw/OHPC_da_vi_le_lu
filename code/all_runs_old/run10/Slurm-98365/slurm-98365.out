@@ -1,0 +1,388 @@
+Iteration 0: Loss = 7558.166159080532, Acceptance Rate = 1.00
+Iteration 1000: Loss = 3459.1888042871947, Acceptance Rate = 0.62
+Iteration 2000: Loss = 3325.6213092920916, Acceptance Rate = 0.61
+Iteration 3000: Loss = 3202.1752409417454, Acceptance Rate = 0.61
+Iteration 4000: Loss = 3059.5198396028068, Acceptance Rate = 0.61
+Iteration 5000: Loss = 2942.2139855208306, Acceptance Rate = 0.61
+Iteration 6000: Loss = 2814.262343165831, Acceptance Rate = 0.61
+Iteration 7000: Loss = 2698.302768340074, Acceptance Rate = 0.61
+Iteration 8000: Loss = 2581.135819134234, Acceptance Rate = 0.61
+Iteration 9000: Loss = 2465.4207991775224, Acceptance Rate = 0.61
+Iteration 10000: Loss = 2358.6084794575477, Acceptance Rate = 0.61
+Iteration 11000: Loss = 2247.3734591857424, Acceptance Rate = 0.61
+Iteration 12000: Loss = 2127.804056501052, Acceptance Rate = 0.61
+Iteration 13000: Loss = 2026.6701737752571, Acceptance Rate = 0.61
+Iteration 14000: Loss = 1923.410476826924, Acceptance Rate = 0.61
+Iteration 15000: Loss = 1817.6673826541667, Acceptance Rate = 0.61
+Iteration 16000: Loss = 1726.342048833601, Acceptance Rate = 0.61
+Iteration 17000: Loss = 1627.411827319859, Acceptance Rate = 0.62
+Iteration 18000: Loss = 1535.7996080778032, Acceptance Rate = 0.62
+Iteration 19000: Loss = 1447.8675438685289, Acceptance Rate = 0.62
+Iteration 20000: Loss = 1366.8687098455973, Acceptance Rate = 0.62
+Iteration 21000: Loss = 1286.7833669661727, Acceptance Rate = 0.62
+Iteration 22000: Loss = 1210.858191381505, Acceptance Rate = 0.62
+Iteration 23000: Loss = 1136.755549323396, Acceptance Rate = 0.62
+Iteration 24000: Loss = 1062.485485932221, Acceptance Rate = 0.62
+Iteration 25000: Loss = 994.6096875285097, Acceptance Rate = 0.62
+Iteration 26000: Loss = 927.9928492693313, Acceptance Rate = 0.62
+Iteration 27000: Loss = 860.7080236600918, Acceptance Rate = 0.63
+Iteration 28000: Loss = 800.976702032231, Acceptance Rate = 0.63
+Iteration 29000: Loss = 736.4997966482634, Acceptance Rate = 0.63
+Iteration 30000: Loss = 684.6657433650986, Acceptance Rate = 0.63
+Iteration 31000: Loss = 628.3295184286211, Acceptance Rate = 0.63
+Iteration 32000: Loss = 583.2126001161969, Acceptance Rate = 0.63
+Iteration 33000: Loss = 535.2517123760982, Acceptance Rate = 0.63
+Iteration 34000: Loss = 487.88089921864594, Acceptance Rate = 0.64
+Iteration 35000: Loss = 443.8375538502184, Acceptance Rate = 0.64
+Iteration 36000: Loss = 404.7918534245846, Acceptance Rate = 0.64
+Iteration 37000: Loss = 368.82957340577184, Acceptance Rate = 0.64
+Iteration 38000: Loss = 331.57251947293287, Acceptance Rate = 0.64
+Iteration 39000: Loss = 295.82684052544, Acceptance Rate = 0.65
+Iteration 40000: Loss = 263.70543060128267, Acceptance Rate = 0.65
+Iteration 41000: Loss = 235.343965262317, Acceptance Rate = 0.65
+Iteration 42000: Loss = 216.7419829597983, Acceptance Rate = 0.65
+Iteration 43000: Loss = 192.92578033534346, Acceptance Rate = 0.65
+Iteration 44000: Loss = 169.87449426552837, Acceptance Rate = 0.66
+Iteration 45000: Loss = 146.16990274256875, Acceptance Rate = 0.66
+Iteration 46000: Loss = 125.34828381039516, Acceptance Rate = 0.66
+Iteration 47000: Loss = 110.16761738454696, Acceptance Rate = 0.66
+Iteration 48000: Loss = 95.01069432698327, Acceptance Rate = 0.67
+Iteration 49000: Loss = 82.83344290404065, Acceptance Rate = 0.67
+Iteration 50000: Loss = 71.3868316962864, Acceptance Rate = 0.67
+Iteration 51000: Loss = 61.61658290380617, Acceptance Rate = 0.68
+Iteration 52000: Loss = 50.44994837915881, Acceptance Rate = 0.68
+Iteration 53000: Loss = 41.68586306788616, Acceptance Rate = 0.68
+Iteration 54000: Loss = 36.207839514696154, Acceptance Rate = 0.69
+Iteration 55000: Loss = 31.431877881643885, Acceptance Rate = 0.69
+Iteration 56000: Loss = 24.917837390235867, Acceptance Rate = 0.69
+Iteration 57000: Loss = 19.933025639229278, Acceptance Rate = 0.70
+Iteration 58000: Loss = 16.019578317783996, Acceptance Rate = 0.70
+Iteration 59000: Loss = 12.675599432491362, Acceptance Rate = 0.70
+Iteration 60000: Loss = 10.475757307527019, Acceptance Rate = 0.71
+Iteration 61000: Loss = 8.650689967150031, Acceptance Rate = 0.71
+Iteration 62000: Loss = 7.719931712922785, Acceptance Rate = 0.71
+Iteration 63000: Loss = 5.937034382571827, Acceptance Rate = 0.72
+Iteration 64000: Loss = 4.941678618444982, Acceptance Rate = 0.72
+Iteration 65000: Loss = 4.087642365802267, Acceptance Rate = 0.72
+Iteration 66000: Loss = 3.409968799344355, Acceptance Rate = 0.73
+Iteration 67000: Loss = 2.7381147639673724, Acceptance Rate = 0.73
+Iteration 68000: Loss = 2.351681560713515, Acceptance Rate = 0.73
+Iteration 69000: Loss = 2.053205976007985, Acceptance Rate = 0.74
+Iteration 70000: Loss = 1.366973399845788, Acceptance Rate = 0.74
+Iteration 71000: Loss = 1.1183661451333462, Acceptance Rate = 0.74
+Iteration 72000: Loss = 0.7282543896940102, Acceptance Rate = 0.75
+Iteration 73000: Loss = 0.5703906447531126, Acceptance Rate = 0.75
+Restarting optimization.
+Restarting optimization.
+Iteration 74000: Loss = 0.48832493516308395, Acceptance Rate = 0.75
+Restarting optimization.
+Iteration 75000: Loss = 0.4469290621887075, Acceptance Rate = 0.76
+Restarting optimization.
+Iteration 76000: Loss = 0.3149293032493413, Acceptance Rate = 0.76
+Restarting optimization.
+Restarting optimization.
+Iteration 77000: Loss = 0.3149293032493413, Acceptance Rate = 0.76
+Restarting optimization.
+Iteration 78000: Loss = 0.2600178872261337, Acceptance Rate = 0.76
+Restarting optimization.
+Iteration 79000: Loss = 0.2278581354294289, Acceptance Rate = 0.77
+Restarting optimization.
+Restarting optimization.
+Iteration 80000: Loss = 0.2278581354294289, Acceptance Rate = 0.77
+Restarting optimization.
+Restarting optimization.
+Iteration 81000: Loss = 0.21962782289257804, Acceptance Rate = 0.77
+Restarting optimization.
+Iteration 82000: Loss = 0.1809497589268333, Acceptance Rate = 0.78
+Restarting optimization.
+Iteration 83000: Loss = 0.16806976850096217, Acceptance Rate = 0.78
+Restarting optimization.
+Iteration 84000: Loss = 0.11782649382199561, Acceptance Rate = 0.78
+Restarting optimization.
+Iteration 85000: Loss = 0.11201598617155899, Acceptance Rate = 0.78
+Restarting optimization.
+Restarting optimization.
+Iteration 86000: Loss = 0.11201598617155899, Acceptance Rate = 0.79
+Restarting optimization.
+Restarting optimization.
+Iteration 87000: Loss = 0.09818204455499108, Acceptance Rate = 0.79
+Iteration 88000: Loss = 0.0855638269301001, Acceptance Rate = 0.79
+Restarting optimization.
+Restarting optimization.
+Iteration 89000: Loss = 0.0855638269301001, Acceptance Rate = 0.79
+Restarting optimization.
+Restarting optimization.
+Iteration 90000: Loss = 0.0839206570909967, Acceptance Rate = 0.79
+Restarting optimization.
+Iteration 91000: Loss = 0.08336940934324102, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 92000: Loss = 0.08336940934324102, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 93000: Loss = 0.08336940934324102, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 94000: Loss = 0.08336940934324102, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 95000: Loss = 0.08336940934324102, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 96000: Loss = 0.08336940934324102, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 97000: Loss = 0.08336940934324102, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 98000: Loss = 0.08336940934324102, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 99000: Loss = 0.08336940934324102, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 0: Loss = 36541.55916236534, Acceptance Rate = 0.00
+Iteration 1000: Loss = 3228.776272511428, Acceptance Rate = 0.57
+Iteration 2000: Loss = 2908.6015714702908, Acceptance Rate = 0.55
+Iteration 3000: Loss = 2584.249178056234, Acceptance Rate = 0.55
+Iteration 4000: Loss = 2282.2811002935055, Acceptance Rate = 0.55
+Iteration 5000: Loss = 1995.515930745304, Acceptance Rate = 0.55
+Iteration 6000: Loss = 1743.7836455424165, Acceptance Rate = 0.55
+Iteration 7000: Loss = 1498.364840512497, Acceptance Rate = 0.56
+Iteration 8000: Loss = 1272.066705196506, Acceptance Rate = 0.56
+Iteration 9000: Loss = 1066.2927160057488, Acceptance Rate = 0.56
+Iteration 10000: Loss = 881.5091742621332, Acceptance Rate = 0.56
+Iteration 11000: Loss = 716.6589769378052, Acceptance Rate = 0.57
+Iteration 12000: Loss = 562.9301933737152, Acceptance Rate = 0.57
+Iteration 13000: Loss = 433.642019848712, Acceptance Rate = 0.57
+Iteration 14000: Loss = 328.1130656640819, Acceptance Rate = 0.57
+Iteration 15000: Loss = 235.7819566728234, Acceptance Rate = 0.58
+Iteration 16000: Loss = 160.2323359656349, Acceptance Rate = 0.58
+Iteration 17000: Loss = 105.4724118098512, Acceptance Rate = 0.58
+Iteration 18000: Loss = 58.47371523519882, Acceptance Rate = 0.59
+Iteration 19000: Loss = 32.246303594389595, Acceptance Rate = 0.60
+Iteration 20000: Loss = 14.662707433476701, Acceptance Rate = 0.61
+Iteration 21000: Loss = 5.41766154310852, Acceptance Rate = 0.62
+Iteration 22000: Loss = 2.3066611519373272, Acceptance Rate = 0.63
+Iteration 23000: Loss = 0.7021365220421293, Acceptance Rate = 0.65
+Iteration 24000: Loss = 0.10770159695758429, Acceptance Rate = 0.66
+Iteration 25000: Loss = 0.08931279133175615, Acceptance Rate = 0.67
+Restarting optimization.
+Restarting optimization.
+Iteration 26000: Loss = 0.08179716828925374, Acceptance Rate = 0.68
+Restarting optimization.
+Restarting optimization.
+Iteration 27000: Loss = 0.08179716828925374, Acceptance Rate = 0.70
+Restarting optimization.
+Restarting optimization.
+Iteration 28000: Loss = 0.08179716828925374, Acceptance Rate = 0.71
+Restarting optimization.
+Restarting optimization.
+Iteration 29000: Loss = 0.08179716828925374, Acceptance Rate = 0.71
+Restarting optimization.
+Restarting optimization.
+Iteration 30000: Loss = 0.08179716828925374, Acceptance Rate = 0.72
+Restarting optimization.
+Restarting optimization.
+Iteration 31000: Loss = 0.08179716828925374, Acceptance Rate = 0.73
+Restarting optimization.
+Restarting optimization.
+Iteration 32000: Loss = 0.08179716828925374, Acceptance Rate = 0.74
+Restarting optimization.
+Restarting optimization.
+Iteration 33000: Loss = 0.08179716828925374, Acceptance Rate = 0.75
+Restarting optimization.
+Restarting optimization.
+Iteration 34000: Loss = 0.08179716828925374, Acceptance Rate = 0.75
+Restarting optimization.
+Iteration 35000: Loss = 0.08179716828925374, Acceptance Rate = 0.76
+Restarting optimization.
+Restarting optimization.
+Iteration 36000: Loss = 0.08179716828925374, Acceptance Rate = 0.77
+Restarting optimization.
+Restarting optimization.
+Iteration 37000: Loss = 0.08179716828925374, Acceptance Rate = 0.77
+Restarting optimization.
+Restarting optimization.
+Iteration 38000: Loss = 0.08127107216028404, Acceptance Rate = 0.78
+Restarting optimization.
+Restarting optimization.
+Iteration 39000: Loss = 0.08127107216028404, Acceptance Rate = 0.78
+Restarting optimization.
+Restarting optimization.
+Iteration 40000: Loss = 0.08127107216028404, Acceptance Rate = 0.79
+Restarting optimization.
+Iteration 41000: Loss = 0.08127107216028404, Acceptance Rate = 0.79
+Restarting optimization.
+Restarting optimization.
+Iteration 42000: Loss = 0.08127107216028404, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 43000: Loss = 0.08127107216028404, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 44000: Loss = 0.08127107216028404, Acceptance Rate = 0.80
+Restarting optimization.
+Restarting optimization.
+Iteration 45000: Loss = 0.08127107216028404, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 46000: Loss = 0.08127107216028404, Acceptance Rate = 0.81
+Restarting optimization.
+Restarting optimization.
+Iteration 47000: Loss = 0.08127107216028404, Acceptance Rate = 0.82
+Restarting optimization.
+Restarting optimization.
+Iteration 48000: Loss = 0.08127107216028404, Acceptance Rate = 0.82
+Restarting optimization.
+Restarting optimization.
+Iteration 49000: Loss = 0.08127107216028404, Acceptance Rate = 0.82
+Restarting optimization.
+Restarting optimization.
+Iteration 50000: Loss = 0.08127107216028404, Acceptance Rate = 0.83
+Restarting optimization.
+Restarting optimization.
+Iteration 51000: Loss = 0.08127107216028404, Acceptance Rate = 0.83
+Restarting optimization.
+Restarting optimization.
+Iteration 52000: Loss = 0.08127107216028404, Acceptance Rate = 0.83
+Restarting optimization.
+Restarting optimization.
+Iteration 53000: Loss = 0.08127107216028404, Acceptance Rate = 0.83
+Restarting optimization.
+Restarting optimization.
+Iteration 54000: Loss = 0.08127107216028404, Acceptance Rate = 0.84
+Restarting optimization.
+Restarting optimization.
+Iteration 55000: Loss = 0.08127107216028404, Acceptance Rate = 0.84
+Restarting optimization.
+Restarting optimization.
+Iteration 56000: Loss = 0.08127107216028404, Acceptance Rate = 0.84
+Restarting optimization.
+Restarting optimization.
+Iteration 57000: Loss = 0.08127107216028404, Acceptance Rate = 0.84
+Restarting optimization.
+Restarting optimization.
+Iteration 58000: Loss = 0.08127107216028404, Acceptance Rate = 0.85
+Restarting optimization.
+Restarting optimization.
+Iteration 59000: Loss = 0.08127107216028404, Acceptance Rate = 0.85
+Restarting optimization.
+Restarting optimization.
+Iteration 60000: Loss = 0.08127107216028404, Acceptance Rate = 0.85
+Restarting optimization.
+Restarting optimization.
+Iteration 61000: Loss = 0.08127107216028404, Acceptance Rate = 0.85
+Restarting optimization.
+Restarting optimization.
+Iteration 62000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Iteration 63000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Restarting optimization.
+Iteration 64000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Restarting optimization.
+Iteration 65000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Restarting optimization.
+Iteration 66000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Restarting optimization.
+Iteration 67000: Loss = 0.08127107216028404, Acceptance Rate = 0.86
+Restarting optimization.
+Restarting optimization.
+Iteration 68000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 69000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 70000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 71000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 72000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 73000: Loss = 0.08127107216028404, Acceptance Rate = 0.87
+Restarting optimization.
+Restarting optimization.
+Iteration 74000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 75000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 76000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 77000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 78000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 79000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 80000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 81000: Loss = 0.08127107216028404, Acceptance Rate = 0.88
+Restarting optimization.
+Restarting optimization.
+Iteration 82000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 83000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Iteration 84000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 85000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 86000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 87000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 88000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 89000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 90000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 91000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 92000: Loss = 0.08127107216028404, Acceptance Rate = 0.89
+Restarting optimization.
+Restarting optimization.
+Iteration 93000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.
+Iteration 94000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.
+Iteration 95000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.
+Iteration 96000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.
+Iteration 97000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.
+Iteration 98000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Iteration 99000: Loss = 0.08127107216028404, Acceptance Rate = 0.90
+Restarting optimization.
+Restarting optimization.

@@ -2,7 +2,6 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
-
 def solar_cycle_model(t, params):
     """
     Calculate the solar cycle model values.
@@ -14,28 +13,23 @@ def solar_cycle_model(t, params):
     Returns:
     - model_values: array-like, calculated model values at time t.
     """
-    n_cycles = len(params) // 3  # Number of cycles
+    n_cycles = len(params) // 3
     T0 = params[::3]
-    epsilon = 1e-5  # Small value to prevent division by zero
-    Ts = np.clip(params[1::3], epsilon, None)  # Clip rising time constant
-    Td = np.clip(params[2::3], epsilon, None)  # Clip decay time constant
+    epsilon = 1e-5
+    Ts = np.clip(params[1::3], epsilon, None)
+    Td = np.clip(params[2::3], epsilon, None)
 
-    t = np.atleast_1d(t)  # Ensure t is an array for consistency
+    t = np.atleast_1d(t)
     result = np.zeros_like(t)
-
-    # Define the piecewise intervals
     intervals = [(T0[i], T0[i + 1]) for i in range(n_cycles - 1)] + [(T0[-1], np.inf)]
 
-    # Calculate the model values for each cycle
     for i, (a, b) in enumerate(intervals):
         mask = (a <= t) & (t < b)
         exponent = -((t[mask] - T0[i]) / Td[i]) ** 2
-        exponent = np.clip(exponent, -100, 0)  # Avoid overflow in exponential
+        exponent = np.clip(exponent, -100, 0)
         result[mask] = (((t[mask] - T0[i]) / Ts[i]) ** 2) * np.exp(exponent)
 
     return result
-
-
 
 def mse_loss(params, t_obs, y_obs, regularization=1e-3):
     """
@@ -54,8 +48,6 @@ def mse_loss(params, t_obs, y_obs, regularization=1e-3):
     mse = np.mean((y_obs - y_pred) ** 2)
     reg_term = regularization * np.sum(params ** 2)
     return mse + reg_term
-
-
 
 def optimize_solar_model(t_obs, y_obs, x0, T0, sigma, n_iter=1e5, early_stop_threshold=1e-6):
     """
@@ -77,7 +69,6 @@ def optimize_solar_model(t_obs, y_obs, x0, T0, sigma, n_iter=1e5, early_stop_thr
         return mse_loss(x, t_obs, y_obs, regularization=1e-3)
 
     return simulated_annealing_tuning(x0, T0, sigma, loss_function, n_iter=n_iter, early_stop_threshold=early_stop_threshold)
-
 
 def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1, early_stop_threshold=1e-6):
     """
@@ -111,7 +102,8 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1, early_
     best_params = x.copy()
     print(f"Initial loss: {best_loss}")
 
-    no_improvement_count = 0  # Early stopping tracker
+    no_improvement_count = 0
+    sigma_decay_rate = 0.99  # Adaptive sigma decay rate
 
     while iter_counter < n_iter:
         iter_counter += 1
@@ -119,37 +111,32 @@ def simulated_annealing_tuning(x0, T0, sigma, f, n_iter=1000, thinning=1, early_
         x_proposal = x_old + np.random.multivariate_normal(means, cov_matrix)
         DeltaE = f(x_proposal) - f(x_old)
 
-        # Metropolis accept/reject step
         if np.exp(-np.clip(DeltaE / T, -100, 100)) >= np.random.rand():
             x = x_proposal
             current_loss = f(x)
             if current_loss < best_loss:
                 best_loss = current_loss
                 best_params = x.copy()
-                no_improvement_count = 0  # Reset early stopping
+                no_improvement_count = 0
             else:
                 no_improvement_count += 1
 
-        # Update temperature (slower cooling schedule) 
-        T = T0 / (1 + np.log(1 + iter_counter)) # changed to log cooling
+        T *= 0.995  # Cooling schedule
+        sigma *= sigma_decay_rate  # Adjust step size dynamically
 
-        # Save states at regular intervals
         if iter_counter % thinning == 0:
             v[iter_counter_thin, :] = x
             iter_counter_thin += 1
 
-        # Log progress every 1000 iterations
         if iter_counter % 1000 == 0:
             print(f"Iteration {iter_counter}: Loss = {best_loss}")
 
-        # Early stopping condition
-        if no_improvement_count > 500 and DeltaE > early_stop_threshold:
-            print(f"Stopping early at iteration {iter_counter}: Loss = {best_loss}")
+        if no_improvement_count > 500:
+            print(f"Early stopping at iteration {iter_counter}: Loss = {best_loss}")
             break
 
     print(f"Best loss: {best_loss} | Parameters: {best_params}")
     return v
-
 
 def plot_solar_model(t_obs, y_obs, params):
     """
