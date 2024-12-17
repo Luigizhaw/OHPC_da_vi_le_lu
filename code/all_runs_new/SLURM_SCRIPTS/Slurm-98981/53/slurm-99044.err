@@ -1,0 +1,14 @@
+2024-12-17 17:44:20,030 - ERROR - Failed to load or parse grid point file: single positional indexer is out-of-bounds
+Traceback (most recent call last):
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py", line 270, in <module>
+    hyper_params = grid_df.iloc[args.grid_point_index].values
+                   ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/net/home/kieffleo/miniconda3/lib/python3.12/site-packages/pandas/core/indexing.py", line 1191, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/net/home/kieffleo/miniconda3/lib/python3.12/site-packages/pandas/core/indexing.py", line 1752, in _getitem_axis
+    self._validate_integer(key, axis)
+  File "/net/home/kieffleo/miniconda3/lib/python3.12/site-packages/pandas/core/indexing.py", line 1685, in _validate_integer
+    raise IndexError("single positional indexer is out-of-bounds")
+IndexError: single positional indexer is out-of-bounds
+srun: error: node018: task 0: Exited with exit code 1

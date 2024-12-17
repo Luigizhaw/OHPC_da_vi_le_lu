@@ -4,11 +4,11 @@ import numpy as np
 # Best hyperparameters found in the last run
 ################################################
 best_T0 = 1.0
-best_sigma = 5e-06
+best_sigma = 1e-07 # average from run 47 and 45 top scorer run 1 array
 ##################################################3
 # Define refined ranges
-T0_range = np.linspace(best_T0 * 0.8, best_T0 * 1.2, 5)  # Vary T0 from 0.8x to 1.2x
-sigma_range = np.linspace(best_sigma * 0.8, best_sigma * 1.2, 5)  # Vary sigma from 0.8x to 1.2x
+T0_range = np.linspace(best_T0 * 0.6, best_T0 * 1.4, 5)  # Vary T0 from 0.8x to 1.2x
+sigma_range = np.linspace(best_sigma * 0.6, best_sigma * 1.4, 5)  # Vary sigma from 0.8x to 1.2x
 
 # Create the refined grid
 refined_grid = [(t0, sigma) for t0 in T0_range for sigma in sigma_range]
