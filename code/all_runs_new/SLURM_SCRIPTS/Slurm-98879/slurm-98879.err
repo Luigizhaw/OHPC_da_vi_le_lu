@@ -1,0 +1,16 @@
+2024-12-17 13:31:13,054 - INFO - Starting hyperparameter tuning...
+Traceback (most recent call last):
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py", line 272, in <module>
+    best_params, best_loss, mse_history = simulated_annealing(
+                                          ^^^^^^^^^^^^^^^^^^^^
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py", line 56, in simulated_annealing
+    current_loss = loss_fn(data, params)
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py", line 111, in loss_function
+    model = model_function(time, params)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py", line 143, in model_function
+    mask = (time >= segment_start) & (time < segment_end)
+            ^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._UFuncNoLoopError: ufunc 'greater_equal' did not contain a loop with signature matching types (<class 'numpy.dtypes.Float64DType'>, <class 'numpy.dtypes.StrDType'>) -> None
+srun: error: node013: task 0: Exited with exit code 1

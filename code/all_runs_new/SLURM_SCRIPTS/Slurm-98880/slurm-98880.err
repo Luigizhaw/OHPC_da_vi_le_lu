@@ -1,0 +1,2 @@
+/net/home/kieffleo/miniconda3/bin/python3: can't open file '/cfs/earth/scratch/kieffleo/OHPC_da_vi_le_lu/code/main_script.py': [Errno 2] No such file or directory
+srun: error: node013: task 0: Exited with exit code 2
