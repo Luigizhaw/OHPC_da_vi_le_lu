@@ -1,7 +1,7 @@
 # Team MINIMIZERS
 
 ## Authors
-- **Victorica Hummel**
+- **Victoria Hummel**
 - **Leonard August Kieffer**
 - **Luigi Palese**
 
