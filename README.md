@@ -1,10 +1,27 @@
-# OHPC_vi_le_lu
-Authors: Victoria Hummel, Leonard Kieffer, Luigi Palese
+# Solar Activity Modeling: Parameter Optimization and Linear Regression
 
-Project Goal: Solar Cycle Parameter Optimization with Simulated Annealing
-This project focuses on tuning and calibrating solar cycle parameters using simulated annealing. It includes a pipeline for hyperparameter optimization, parallelized job execution, and final result analysis with linear regression.
+## Authors
+- **Victorica Hummel**
+- **Leonard August Kieffer**
+- **Luigi Palese**
 
-Folder Structure
+---
+
+## Overview
+This project focuses on optimizing parameters for solar activity modeling using **Simulated Annealing (SA)** and performing linear regression analyses. It leverages SLURM job arrays for parallelized execution and aims to fine-tune model parameters to achieve the best Mean Squared Error (MSE).
+
+---
+
+## Objectives
+1. Optimize hyperparameters (`T0`, `sigma`) and calibrate models for improved performance.
+2. Explore correlations between parameters (`Ts`, `Td`) using linear regression techniques.
+3. Automate parameter reshaping, result summaries, and visualization workflows.
+
+---
+
+## Folder Structure
+```plaintext
+.
 ├── code/
 │   ├── Datasets/
 │   │   └── data_Minimizers.csv       # Input dataset for optimization
@@ -33,44 +50,44 @@ Folder Structure
 │       ├── mse_plot.png             # MSE vs. iteration plot
 │       └── fit_plot.png             # Observed vs. model fit plot
 └── README.md                        # Project documentation
-Requirements
-Python 3.x
-Dependencies: Install all required libraries in a virtual environment located in the ohpc/ directory.
-Setting Up the Environment
-Activate the Python virtual environment:
-bash
-Code kopieren
-source code/ohpc/bin/activate
-Install dependencies:
-bash
-Code kopieren
-pip install -r requirements.txt
-Workflow
-1. Generate Hyperparameter Grid
-Use the grid_maker.py script to generate a grid of hyperparameters for the tuning process.
-python3 code/grid_maker.py --output code/grid.csv
-2. Run Tuning Jobs
-Run the SLURM array job script to execute multiple tuning jobs in parallel.
-sbatch code/array_job.sh
-3. Analyze Results
-Use results.py to extract the top-performing runs from the log files.
-bash
-Code kopieren
-python3 code/results.py
-4. Calibration
-After identifying the best hyperparameters, run the calibration jobs with the SLURM single job script:
 
-sbatch code/single_job.sh
-Results Analysis
-MSE vs. Iteration
-View the mse_plot.png generated in the results directory to evaluate the tuning progress.
+````
+## 2. Running the Main Script
+python3 code/main_script.py \
+    --data-file datasets/data_Minimizers.csv \
+    --output-dir results/job_X \
+    --tune \
+    --n-iter 1000000 \
+    --grid-point-file datasets/grid.csv \
+    --grid-point-index 0 \
+    --initial-conditions-file datasets/initial_conditions.csv
 
-Parameter Fit
-Use the Final_Fit_linear_regression.py script for final regression analysis.
+### 2.1 Calibration:
+python3 code/main_script.py \
+    --data-file datasets/data_Minimizers.csv \
+    --output-dir results/job_X_calibration \
+    --calibrate \
+    --n-iter 1000000 \
+    --grid-point-file datasets/grid.csv \
+    --grid-point-index 0 \
+    --initial-conditions-file datasets/initial_conditions.csv
+
+## 3. Parallelizing with SLURM
+Submit the SLURM job array script:
+
+sbatch code/SLURM_SCRIPTS/array_tune.sh
 
 
-python3 code/Final_Fit_linear_regression.py --input results/job_<ID>/calibrated_params_reshaped.csv
-Tips for Further Optimization
-Refine the hyperparameter grid around the best values found during tuning.
-Increase --n-iter for finer optimization in calibration.
-Use the results.py script to track the best MSE during parallelized runs.
+
+## Key Features
+Parallelized Simulations: Optimize hyperparameters for multiple grid points simultaneously using SLURM.
+Dynamic Reshaping: Automate reshaping of parameters for calibration and tuning.
+Analysis & Visualization: Generate plots, including regression lines and MSE evolution.
+Results Summary
+Best MSE Achieved: 593
+## Key Insights:
+Correlation observed between Ts and Td with slope = 0.018 (years).
+Optimal hyperparameters identified for further refinement.
+## References
+Penza et al. (2024). Astrophysics literature reference.
+Documentation on Simulated Annealing methods.
