@@ -1,4 +1,4 @@
-# Solar Activity Modeling: Parameter Optimization and Linear Regression
+# Team MINIMIZERS
 
 ## Authors
 - **Victorica Hummel**
